@@ -1,5 +1,6 @@
 # glassjs
 jQuery library for window resize events.
+[Download](https://github.com/derekborland/glassjs/blob/master/src/glass.js)
 
 #### init
 ```
