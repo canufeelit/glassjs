@@ -46,14 +46,12 @@
 			for(var key in options) { 
 				
 				if(options[key].length === 2 && windowWidth >= options[key][0] && windowWidth <= options[key][1]) {
-					// console.log(key);
 					if(lastEvent === key) return;
 					lastEvent = key;
 					$win.trigger('glass.' + key, [windowWidth]);
 				}
 				
 				if(options[key].length === 1 && windowWidth >= options[key][0]) {
-					// console.log(key);
 					if(lastEvent === key) return;
 					lastEvent = key;
 					$win.trigger('glass.' + key, [windowWidth]);
