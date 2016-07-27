@@ -1,0 +1,27 @@
+{
+  "name": "glassjs",
+  "version": "0.0.1",
+  "description": "jQuery library for window resize events.",
+  "main": "src/glass.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/derekborland/glassjs.git"
+  },
+  "keywords": [
+    "jquery",
+    "responsive",
+    "events",
+    "glass",
+    "javascript",
+    "breakpoints"
+  ],
+  "author": "Derek Borland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/derekborland/glassjs/issues"
+  },
+  "homepage": "https://github.com/derekborland/glassjs#readme"
+}
