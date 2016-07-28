@@ -1,5 +1,5 @@
 # glassjs
-jQuery library for window resize events.
+jQuery library to run js within certain breakpoints.
 [Download](https://github.com/derekborland/glassjs/blob/master/src/glass.js)
 
 #### init
@@ -7,12 +7,18 @@ jQuery library for window resize events.
 glass();
 ```
 
-#### defaults
+#### init with custom debounce time
+*default = 400*
+```
+glass(1000);
+```
+
+#### default breakpoints
 ```
 var DEFAULTS = {
-	'sm': [0, 768],
-	'med': [769, 1024],
-	'lrg': [1025] 
+	'sm': [0, 767],
+	'med': [768, 1023],
+	'lrg': [1024]
 };
 ```
 
@@ -26,7 +32,15 @@ glass({
 });
 ```
 
+#### init with custom breaks & debounce time
+```
+glass({
+	...
+}, 1000);
+```
+
 #### listen for events
+*event fires once on entry of breakpoint*
 ```
 $(window).on('glass.sm', function(){
 	// window width in range: [769, 992]

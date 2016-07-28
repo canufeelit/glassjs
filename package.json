@@ -1,7 +1,7 @@
 {
   "name": "glassjs",
-  "version": "0.0.1",
-  "description": "jQuery library for window resize events.",
+  "version": "0.0.2",
+  "description": "jQuery library to run js within certain breakpoints.",
   "main": "src/glass.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

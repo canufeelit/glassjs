@@ -1,67 +1,74 @@
 /**
- * glassjs - jQuery library for window resize events.
- * @version v0.0.1
+ * glassjs - jQuery library to run js within certain breakpoints.
+ * @version v0.0.2
  * @link https://github.com/derekborland/glassjs#readme
  * @license MIT
  */
 ;(function($, window) {
 	
 	var $win;
-	var options;
 	var windowWidth;
 	var lastEvent;
-	var debounceTime = 400;
 	
 	var DEFAULTS = {
-		'sm': [0, 768],
-		'med': [769, 1024],
-		'lrg': [1025] 
+		'sm': [0, 767],
+		'med': [768, 1023],
+		'lrg': [1024]
 	};
 	
-	function Glass(options) {
+	function Glass(options, debounceTime) {
 		$win = $(window);
 		
-		if(!options) options = DEFAULTS;
-		if(options) options = $.extend({}, DEFAULTS, options);
+		// allow setting of debounceTime only
+		if(typeof options === 'number') {
+			debounceTime = options;
+			options = {};
+		}
+		
+		options = options || {};
+		options = $.extend({}, DEFAULTS, options);
+		debounceTime = debounceTime || 400;
 		
 		// debounce
-		function debounce(func, wait, immediate) {
+		function debounce(func, wait) {
 			var timeout;
 			return function() {
-				var context = this, args = arguments;
+				var ctx = this,
+						args = arguments;
 				var later = function() {
 					timeout = null;
-					if(!immediate) func.apply(context, args);
+					func.apply(ctx, args);
 				}
-				var callNow = immediate && !timeout;
 				clearTimeout(timeout);
 				timeout = setTimeout(later, wait);
-				if(callNow) func.apply(context, args);
 			};
+		}
+		
+		// [768, 1023]
+		function inRange(options, key, windowWidth) {
+			return options[key].length === 2 && windowWidth >= options[key][0] && windowWidth <= options[key][1];
+		}
+		
+		// [1024]
+		function aboveRange(options, key, windowWidth) {
+			return options[key].length === 1 && windowWidth >= options[key][0];
 		}
 		
 		// window resize event
 		$win.resize(debounce(function() {
 			windowWidth = $win.width();
-			for(var key in options) { 
-				
-				if(options[key].length === 2 && windowWidth >= options[key][0] && windowWidth <= options[key][1]) {
+			for(var key in options) { 				
+				if( inRange(options, key, windowWidth) || aboveRange(options, key, windowWidth) ) {
 					if(lastEvent === key) return;
 					lastEvent = key;
 					$win.trigger('glass.' + key, [windowWidth]);
 				}
-				
-				if(options[key].length === 1 && windowWidth >= options[key][0]) {
-					if(lastEvent === key) return;
-					lastEvent = key;
-					$win.trigger('glass.' + key, [windowWidth]);
-				}
-				
 			}
 		}, debounceTime));
 		
 	};
 	
+	// @todo remove jQuery dep
 	window.glass = Glass;
 	
 })(jQuery, window);
