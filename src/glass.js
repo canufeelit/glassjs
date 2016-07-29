@@ -1,6 +1,6 @@
 /**
  * glassjs - jQuery library to run js within certain breakpoints.
- * @version v0.0.3
+ * @version v0.0.4
  * @link https://github.com/derekborland/glassjs#readme
  * @license MIT
  */
