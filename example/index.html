@@ -1,0 +1,50 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+  </head>
+  <body>
+
+    <div id="page">
+      
+      <h1 id="text"></h1>
+      
+    </div>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../src/glass.js"></script>
+    <script>
+      ;(function($){
+        $(function(){
+          
+          var heading = $('#text');
+          var $win = $(window);
+          
+          glass({
+            'sm': [0, 767],
+            'med': [768, 1023],
+            'lrg': [1024]
+          });
+          
+          $win.on('glass.sm', function() {
+            heading.text('small');
+          });
+          
+          $win.on('glass.med', function() {
+            heading.text('medium');
+          });
+          
+          $win.on('glass.lrg', function() {
+            heading.text('large');
+          });
+          
+        });
+      })(jQuery);
+    </script>
+    
+  </body>
+</html>

@@ -1,6 +1,6 @@
 /**
  * glassjs - jQuery library to run js within certain breakpoints.
- * @version v0.0.2
+ * @version v0.0.3
  * @link https://github.com/derekborland/glassjs#readme
  * @license MIT
  */
@@ -26,7 +26,7 @@
 		}
 		
 		options = options || {};
-		options = $.extend({}, DEFAULTS, options);
+		options = extend(DEFAULTS, options);
 		debounceTime = debounceTime || 400;
 		
 		// debounce
@@ -54,9 +54,7 @@
 			return options[key].length === 1 && windowWidth >= options[key][0];
 		}
 		
-		// window resize event
-		$win.resize(debounce(function() {
-			windowWidth = $win.width();
+		function triggerBreak(windowWidth) {
 			for(var key in options) { 				
 				if( inRange(options, key, windowWidth) || aboveRange(options, key, windowWidth) ) {
 					if(lastEvent === key) return;
@@ -64,8 +62,20 @@
 					$win.trigger('glass.' + key, [windowWidth]);
 				}
 			}
-		}, debounceTime));
+		}
 		
+		function extend(obj, src) {
+			for(var key in src) {
+				if(src.hasOwnProperty(key)) obj[key] = src[key];
+			}
+			return obj;
+		}
+		
+		// window resize event
+		$win.resize(debounce(function() { triggerBreak($win.width()); }, debounceTime));
+		
+		// doc ready
+		$(function(){ triggerBreak($win.width()); });
 	};
 	
 	// @todo remove jQuery dep
