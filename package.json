@@ -1,6 +1,6 @@
 {
   "name": "glassjs",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "jQuery library to run js within certain breakpoints.",
   "main": "src/glass.js",
   "scripts": {

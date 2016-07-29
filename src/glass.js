@@ -1,6 +1,6 @@
 /**
  * glassjs - jQuery library to run js within certain breakpoints.
- * @version v0.0.4
+ * @version v0.1.0
  * @link https://github.com/derekborland/glassjs#readme
  * @license MIT
  */
@@ -16,6 +16,8 @@
 		'lrg': [1024]
 	};
 	
+	var DEFAULT_DEBOUNCE_TIME = 400;
+	
 	function Glass(options, debounceTime) {
 		$win = $(window);
 		
@@ -25,7 +27,7 @@
 			options = DEFAULTS;
 		} else {
 			options = options || DEFAULTS;
-			debounceTime = debounceTime || 400;
+			debounceTime = debounceTime || DEFAULT_DEBOUNCE_TIME;
 		}
 		
 		// debounce
