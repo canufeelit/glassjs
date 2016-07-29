@@ -22,12 +22,11 @@
 		// allow setting of debounceTime only
 		if(typeof options === 'number') {
 			debounceTime = options;
-			options = {};
+			options = DEFAULTS;
+		} else {
+			options = options || DEFAULTS;
+			debounceTime = debounceTime || 400;
 		}
-		
-		options = options || {};
-		options = extend(DEFAULTS, options);
-		debounceTime = debounceTime || 400;
 		
 		// debounce
 		function debounce(func, wait) {
@@ -62,13 +61,6 @@
 					$win.trigger('glass.' + key, [windowWidth]);
 				}
 			}
-		}
-		
-		function extend(obj, src) {
-			for(var key in src) {
-				if(src.hasOwnProperty(key)) obj[key] = src[key];
-			}
-			return obj;
 		}
 		
 		// window resize event
